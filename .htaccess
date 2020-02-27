@@ -1,0 +1,16 @@
+<IfModule mod_rewrite.c>
+   ###remove index.php file from url in codeigiter 
+	  RewriteEngine On
+	  RewriteCond %{REQUEST_FILENAME} !-f
+	  RewriteCond %{REQUEST_FILENAME} !-d
+	  RewriteRule ^(.*)$ index.php/$1 [L]
+    
+	  ### Below Code for the http to https redirection
+    
+    RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+    RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+    RewriteEngine On 
+    RewriteCond %{HTTP_HOST} ^hutlo\.in [NC]
+    RewriteCond %{SERVER_PORT} 80 
+    RewriteRule ^(.*)$ https://hutlo.in/$1 [R=301,L]
+</IfModule>
